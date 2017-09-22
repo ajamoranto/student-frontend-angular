@@ -15,6 +15,23 @@ import { DataService } from './data.service';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 import { StudentFormComponent } from './student-form/student-form.component';
 import { StatusMessageComponent } from './status-message/status-message.component';
+import { MajorComponent } from './major/major.component';
+import { MajorFormComponent } from './major-form/major-form.component';
+import { GradeComponent } from './grade/grade.component';
+import { GradeFormComponent } from './grade-form/grade-form.component';
+import { AssignmentComponent } from './assignment/assignment.component';
+import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
+import { ClassComponent } from './class/class.component';
+import { ClassFormComponent } from './class-form/class-form.component';
+import { KlassComponent } from './klass/klass.component';
+import { KlassFormComponent } from './klass-form/klass-form.component';
+import { StudentClassComponent } from './student-class/student-class.component';
+import { StudentClassFormComponent } from './student-class-form/student-class-form.component';
+import { MajorClassComponent } from './major-class/major-class.component';
+import { MajorClassFormComponent } from './major-class-form/major-class-form.component';
+import { InstructorComponent } from './instructor/instructor.component';
+import { InstructorformComponent } from './instructorform/instructorform.component';
+import { InstructorFormComponent } from './instructor-form/instructor-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +41,24 @@ import { StatusMessageComponent } from './status-message/status-message.componen
     HomeComponent,
     DeleteConfirmComponent,
     StudentFormComponent,
-    StatusMessageComponent
+    StatusMessageComponent,
+    MajorComponent,
+    MajorFormComponent,
+    GradeComponent,
+    GradeFormComponent,
+    AssignmentComponent,
+    AssignmentFormComponent,
+    ClassComponent,
+    ClassFormComponent,
+    KlassComponent,
+    KlassFormComponent,
+    StudentClassComponent,
+    StudentClassFormComponent,
+    MajorClassComponent,
+    MajorClassFormComponent,
+    InstructorComponent,
+    InstructorformComponent,
+    InstructorFormComponent
   ],
   imports: [
     BrowserModule,
