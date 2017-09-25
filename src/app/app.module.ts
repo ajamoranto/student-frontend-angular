@@ -21,8 +21,7 @@ import { GradeComponent } from './grade/grade.component';
 import { GradeFormComponent } from './grade-form/grade-form.component';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
-import { ClassComponent } from './class/class.component';
-import { ClassFormComponent } from './class-form/class-form.component';
+
 import { KlassComponent } from './klass/klass.component';
 import { KlassFormComponent } from './klass-form/klass-form.component';
 import { StudentClassComponent } from './student-class/student-class.component';
@@ -30,7 +29,7 @@ import { StudentClassFormComponent } from './student-class-form/student-class-fo
 import { MajorClassComponent } from './major-class/major-class.component';
 import { MajorClassFormComponent } from './major-class-form/major-class-form.component';
 import { InstructorComponent } from './instructor/instructor.component';
-import { InstructorformComponent } from './instructorform/instructorform.component';
+
 import { InstructorFormComponent } from './instructor-form/instructor-form.component';
 
 @NgModule({
@@ -48,8 +47,7 @@ import { InstructorFormComponent } from './instructor-form/instructor-form.compo
     GradeFormComponent,
     AssignmentComponent,
     AssignmentFormComponent,
-    ClassComponent,
-    ClassFormComponent,
+
     KlassComponent,
     KlassFormComponent,
     StudentClassComponent,
@@ -57,7 +55,6 @@ import { InstructorFormComponent } from './instructor-form/instructor-form.compo
     MajorClassComponent,
     MajorClassFormComponent,
     InstructorComponent,
-    InstructorformComponent,
     InstructorFormComponent
   ],
   imports: [
