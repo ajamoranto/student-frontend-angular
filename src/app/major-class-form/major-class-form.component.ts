@@ -3,13 +3,15 @@ import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
+import { fadeInAnimation } from '../animations/fade-in.animation';
 
 import { DataService } from '../data.service'
 
 @Component({
   selector: 'app-major-class-form',
   templateUrl: './major-class-form.component.html',
-  styleUrls: ['./major-class-form.component.css']
+  styleUrls: ['./major-class-form.component.css'],
+  animations: [fadeInAnimation]
 })
 export class MajorClassFormComponent implements OnInit {
   

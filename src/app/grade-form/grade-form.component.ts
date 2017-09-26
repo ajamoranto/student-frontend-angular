@@ -1,15 +1,17 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
+import { fadeInAnimation } from '../animations/fade-in.animation';
 
 import { DataService } from '../data.service'
 
 @Component({
   selector: 'app-grade-form',
   templateUrl: './grade-form.component.html',
-  styleUrls: ['./grade-form.component.css']
+  styleUrls: ['./grade-form.component.css'],
+  animations: [fadeInAnimation]
 })
 export class GradeFormComponent implements OnInit {
   
@@ -17,6 +19,9 @@ export class GradeFormComponent implements OnInit {
     errorMessage: string;
   
     gradeData: object;
+
+    gradeForm: NgForm;
+    @ViewChild('gradeForm') currentForm: NgForm;
   
     getRecordForEdit(){
       this.route.params
@@ -53,5 +58,47 @@ export class GradeFormComponent implements OnInit {
       }
   
     }
+
+    ngAfterViewChecked() {
+      this.formChanged();
+    }
+  
+    formChanged() {
+      this.gradeForm = this.currentForm;
+      this.gradeForm.valueChanges
+        .subscribe(
+          data => this.onValueChanged(data)
+        );
+    }
+  
+    onValueChanged(data?: any) {
+      let form = this.gradeForm.form;
+  
+      for (let field in this.formErrors) {
+        // clear previous error message (if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+  
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            this.formErrors[field] += messages[key] + ' ';
+          }
+        }
+      }
+    }
+  
+    formErrors = {
+      'grade': '',
+    };
+  
+    validationMessages = {
+      'grade': {
+        'required': 'Grade is required.',
+        'minlength': 'Grade must be at least 2 characters long.',
+        'maxlength': 'Grade cannot be more than 30 characters long.'
+      }
+    };
+  
   
   }

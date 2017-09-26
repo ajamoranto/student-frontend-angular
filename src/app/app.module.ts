@@ -32,6 +32,7 @@ import { InstructorComponent } from './instructor/instructor.component';
 
 import { InstructorFormComponent } from './instructor-form/instructor-form.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

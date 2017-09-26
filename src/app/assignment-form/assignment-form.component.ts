@@ -1,15 +1,17 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
+import { fadeInAnimation } from '../animations/fade-in.animation';
 
 import { DataService } from '../data.service'
 
 @Component({
   selector: 'app-assignment-form',
   templateUrl: './assignment-form.component.html',
-  styleUrls: ['./assignment-form.component.css']
+  styleUrls: ['./assignment-form.component.css'],
+  animations: [fadeInAnimation]
 })
 export class AssignmentFormComponent implements OnInit {
   
@@ -20,6 +22,9 @@ export class AssignmentFormComponent implements OnInit {
     students: any[];
     grades: any[];
     classes: any[];
+
+    assignmentForm: NgForm;
+    @ViewChild('assignmentForm') currentForm: NgForm;
   
     getRecordForEdit(){
       this.route.params
@@ -79,5 +84,58 @@ export class AssignmentFormComponent implements OnInit {
       }
   
     }
+
+
+    ngAfterViewChecked() {
+      this.formChanged();
+    }
+  
+    formChanged() {
+      this.assignmentForm = this.currentForm;
+      this.assignmentForm.valueChanges
+        .subscribe(
+          data => this.onValueChanged(data)
+        );
+    }
+  
+    onValueChanged(data?: any) {
+      let form = this.assignmentForm.form;
+  
+      for (let field in this.formErrors) {
+        // clear previous error message (if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+  
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            this.formErrors[field] += messages[key] + ' ';
+          }
+        }
+      }
+    }
+  
+    formErrors = {
+      'student_id': '',
+      'assignment_nbr': '',
+      'grade_id': '',
+      'class_id': '',
+      'gpa': ''
+    };
+  
+    validationMessages = {
+      'student_id': {
+        'required': 'Student ID required.'
+      },
+      'assignment_nbr': {
+        'required': 'Must be a number.'
+      },
+      'grade_id': {
+        'required': 'Grade is required.'
+      },
+      'class_id': {
+        'required': 'Class is required.'
+      }
+    };
   
   }

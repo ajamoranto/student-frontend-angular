@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
@@ -19,6 +19,9 @@ export class StudentClassFormComponent implements OnInit {
     studentClass;
     students: any[];
     classes: any[];
+
+    studentClassForm: NgForm;
+    @ViewChild('studentClassForm') currentForm: NgForm;
   
     getRecordForEdit(){
       this.route.params
@@ -70,5 +73,50 @@ export class StudentClassFormComponent implements OnInit {
       }
   
     }
+
+
+
+    ngAfterViewChecked() {
+      this.formChanged();
+    }
+  
+    formChanged() {
+      this.studentClassForm = this.currentForm;
+      this.studentClassForm.valueChanges
+        .subscribe(
+          data => this.onValueChanged(data)
+        );
+    }
+  
+    onValueChanged(data?: any) {
+      let form = this.studentClassForm.form;
+  
+      for (let field in this.formErrors) {
+        // clear previous error message (if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+  
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            this.formErrors[field] += messages[key] + ' ';
+          }
+        }
+      }
+    }
+  
+    formErrors = {
+      'major': '',
+      'sat': ''
+    };
+  
+    validationMessages = {
+      'major': {
+        'required': 'Major is required.'
+      },
+      'sat': {
+        'required': 'SAT is required.'
+      }
+    };
   
   }
